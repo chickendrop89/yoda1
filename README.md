@@ -4,7 +4,7 @@ This script grabs weight data that is transmitted by a
 
 ## Usage
 ```
-usage: main.py [-h] [-a ADDRESS] [-t TIMEOUT]
+usage: sniffer.py [-h] [-a ADDRESS] [-t TIMEOUT]
 
 yoda1-sniffer - a tool to grab weight data transmitted from a yoda1 bluetooth scale
 
