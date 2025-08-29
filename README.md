@@ -17,10 +17,11 @@ options:
 ```
 
 ## Instructions
-- This script requires the device to be turned on (either by stepping or 
+- This script requires the device to be turned on (either by stepping on or 
 clicking the button on the back side of the scale) for it to be discovered.
-- After a succesful scan is complete, the script will automatically listen 
-for when the same MAC address advertises the weight data again.
+
+- When the device is discovered, the script will automatically listen 
+for all advertisments from it's MAC address indefinitely
 
 ## Basic Examples
 Running the tool to automatically discover any close `yoda1` scale, and listen for it
@@ -34,7 +35,7 @@ python sniffer.py -a 50:FB:19:XX:XX:XX
 ```
 
 ## Notes
-- This script is hardcoded to listen for MAC addresses starting with `50:FB:19`. If your
+- This script is hardcoded to discover MAC addresses starting with `50:FB:19`. If your
 scale's MCU is manufactured by a different company *for some reason*, you might want to edit it.
 
 ## Requirements
