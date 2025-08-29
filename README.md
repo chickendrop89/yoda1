@@ -41,7 +41,7 @@ scale's MCU is manufactured by a different company *for some reason*, you might 
 ## Requirements
 - Python 3.9 or newer
 - A Bluetooth interface
-- A distro with `bluez` support
+- An OS compatible with [Bleak's requirements](https://github.com/hbldh/bleak?tab=readme-ov-file#features)
 
 ## Scale image
 ![Yoda1 Scale](yoda1-scale.png)
