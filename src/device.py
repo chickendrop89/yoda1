@@ -75,22 +75,28 @@ class YodaDevice:
         """Scans for the scale for a given amount of time."""
 
         yoda_devices = {}
+        device_found = asyncio.Event()
 
         def detection_callback(device: BLEDevice, advertisement_data: AdvertisementData) -> None:
             if device.address.upper().startswith(YODA_MAC_PREFIX):
                 if device.address not in yoda_devices:
-                    logger.info("Found a Yoda1 scale: %s, waiting for the scan to end", device.address)
+                    logger.info("Found a Yoda1 scale: %s", device.address)
 
                     scale_data = _parse_device_data(advertisement_data)
                     yoda_devices[device.address] = cls(device.address, scale_data, device)
 
-        async with BleakScanner(detection_callback) as _scanner:
-            if timeout:
-                await asyncio.sleep(timeout)
-            else:
-                # Scan forever and keep the script running
-                while True:
-                    await asyncio.sleep(1.0)
+                    if not timeout:
+                        device_found.set()
+
+        async with BleakScanner(detection_callback) as scanner:
+            try:
+                if timeout:
+                    await asyncio.sleep(timeout)
+                else:
+                    # Scan until the first device is found
+                    await device_found.wait()
+            finally:
+                await scanner.stop()
 
         logger.info("Scan complete. Found %s devices.", len(yoda_devices))
         return list(yoda_devices.values())
