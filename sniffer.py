@@ -74,7 +74,7 @@ async def scan(address: str, timeout: int) -> None:
 
         device = devices[0]
     try:
-        await device.watch_events(handle_data)
+        await device.listen_for_events(handle_data)
     except asyncio.CancelledError:
         logger.info("Event watching canceled.")
 
